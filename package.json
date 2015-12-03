@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/nsutter/Elseware#readme",
   "devDependencies": {
+    "bootstrap-sass": "^3.3.6",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
