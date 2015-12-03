@@ -14,4 +14,10 @@ router.get('/signaler', function(req, res, next) {
   res.render('signaler', { title: 'Signaler' });
 });
 
+router.post('/signaler', function(req, res, next) {
+  console.log(req.body.nom + "/" + req.body.date);
+  console.log(req.body.message);
+  console.log(req.body.latitude + "/" + req.body.longitude);
+  });
+
 module.exports = router;
