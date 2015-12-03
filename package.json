@@ -1,0 +1,29 @@
+{
+  "name": "elseware",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "projet nuit de l'info",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nsutter/Elseware.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nsutter/Elseware/issues"
+  },
+  "homepage": "https://github.com/nsutter/Elseware#readme"
+}
