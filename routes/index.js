@@ -5,6 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'EventReporter' });
 });
+router.get('/home', function(req, res, next) {
+  res.render('index', { title: 'EventReporter' });
+});
 
 router.get('/event', function(req, res, next) {
   res.render('event', { title: 'Evenements' });
