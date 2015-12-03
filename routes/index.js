@@ -10,14 +10,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/event', function(req, res, next) {
-  res.render('event', { title: 'Evenements' });
+  res.render('event', { title: 'Événements' });
 });
 
+router.get('/signaler', function(req, res, next) {
+  res.render('signaler', { title: 'Signaler un événement' });
+});
 
 router.post('/signaler', function(req, res, next) {
-  console.log(req.body.nom + "/" + req.body.date);
-  console.log(req.body.message);
-  console.log(req.body.latitude + "/" + req.body.longitude);
-});
+  //req.body.date req.body.message req.body.latitude req.body.longitude
+  });
 
 module.exports = router;
