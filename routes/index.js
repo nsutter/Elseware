@@ -10,7 +10,7 @@ router.get('/event', function(req, res, next) {
   res.render('event', { title: 'Evenements' });
 });
 
-router.get('/event', function(req, res, next) {
+router.get('/signaler', function(req, res, next) {
   res.render('signaler', { title: 'Signaler' });
 });
 
