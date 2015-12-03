@@ -4,6 +4,8 @@ $(document).ready(function() {
     var lat = 0;
     var long = 0;
 
+    $('#ip').val(myip);
+
     today = new Date();
     $('#date').val(today);
 

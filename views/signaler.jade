@@ -1,13 +1,16 @@
 extends layout
 
 block content
+  script(type="text/javascript", src="https://www.l2.io/ip.js?var=myip")
   script.
     var yolo = 42;
   h1= "Signaler un événement"
+  | Par mesure de sécurité, votre adresse IP est sauvegardé lors d'un signalement
   form(role='form', name='form', action='/signaler', method='post', enctype='plain')
     .form-group
       input.form-control#latitude(type='hidden', name='latitude', value='')
       input.form-control#longitude(type='hidden', name='longitude', value='')
       input.form-control#date(type='hidden', name='date', value='')
+      input.form-control#ip(type='hidden', name='ip', value='')
       input.form-control(type='text', name='message', placeholder="Description rapide de l'événement")
       button.btn.btn-default(type='submit') Envoyer le signalement
