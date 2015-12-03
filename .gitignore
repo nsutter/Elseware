@@ -2,3 +2,5 @@ node_modules/
 ~*
 npm-debug.log
 base.db
+.DS_Store
+public/
