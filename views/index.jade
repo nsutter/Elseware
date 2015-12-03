@@ -10,7 +10,15 @@ block content
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a(class='navbar-brand', href='#') THE Project
-        .navbar(class='collapse navbar-collapse')
-      h1 #{title}
-      p Welcome to LOL #{title}
+          a(class='navbar-brand', href='#') #{title}
+        div(id='navbar', class='collapse navbar-collapse')
+          ul(class='nav navbar-nav')
+            li
+              a(href='#home') Accueil
+            li
+              a(href='/event') Evènements
+            li
+              a(href='/signaler') Signaler
+    p Vous êtes témoins d'un incident (un incendie, une catastrophe naturelle, un braquage, )
+    a(class='btn btn-primary homepage-btn') Evènements
+    a(class='btn btn-danger homepage-btn') Signaler
