@@ -1,7 +1,6 @@
-module.exports = function(models, bookshelf) {
-  var User = bookshelf.Model.extend({
-    tableName: 'users'
-  });
+var mongoose = require('mongoose');
 
-  return User;
-};
+module.exports = mongoose.model('User',{
+	nom: String,
+	pwd: String
+});
