@@ -8,5 +8,6 @@ module.exports = mongoose.model('Event',{
 	type: Number,
   longitude: Number,
   latitude: Number,
-  date: Date
+  date: Date,
+	ip: String
 });

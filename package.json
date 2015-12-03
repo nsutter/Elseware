@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run build && node ./bin/www",
+    "start": "node ./bin/www",
     "build": "gulp build",
     "watch": "gulp watch"
   },
