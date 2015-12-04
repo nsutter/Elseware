@@ -54,7 +54,6 @@ router.get('/info/:id', function(req, res, next) {
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'EventReporter' });
-  console.log("user :" + req.user);
 });
 
 router.get('/event', function(req, res, next) {
@@ -68,10 +67,22 @@ router.get('/signaler', function(req, res, next) {
 });
 
 router.post('/signaler', function(req, res, next) {
-  var newEvent = new Event({nom: req.body.nom, description: req.body.message, statut: 0, date: req.body.date, longitude: req.body.longitude, latitude: req.body.latitude, date: req.body.date, ip: req.body.ip});
+  var newEvent = new Event({nom: req.body.nom, description: req.body.message, statut: 0, description_admin: "Pas de description admin.", date: req.body.date, longitude: req.body.longitude, latitude: req.body.latitude, date: req.body.date, ip: req.body.ip});
   newEvent.save();
   res.redirect('/');
   });
+
+  router.post('/update_admin', function(req, res, next) {
+    var statut = 0;
+
+    if(req.body.statut1 !== undefined && req.body.statut1 == 'on')
+      statut = 1;
+    else if(req.body.statut2 !== undefined && req.body.statut2 == 'on')
+      statut = 2;
+
+    Event.update({_id: req.body.id_modification}, {description_admin: req.body.description_admin, statut: statut}).exec();
+    res.redirect('/admin');
+    });
 
   var server = require('http').createServer(router),
       io = require('socket.io').listen(server),
@@ -85,7 +96,6 @@ router.post('/signaler', function(req, res, next) {
 
     socket.on('nouveau_client', function(pseudo, room) {
         socket.join(room);
-        console.log("yolo", pseudo, room);
         pseudo = ent.encode(pseudo);
         socket.broadcast.to(room).emit('nouveau_client', pseudo);
     });
