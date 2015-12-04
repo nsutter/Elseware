@@ -16,7 +16,7 @@ block content
           else if(data.status == 1)
             | Les secours ont été informés
             br
-          else  
+          else if(data.status == 2)
             | Les secours ont été envoyés
             br
           span(id='date', class="date-object") #{data.date}
