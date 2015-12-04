@@ -10,8 +10,15 @@ block content
           br
           | #{data.description}
           br
-          | #{data.admin}
+          | #{data.description_admin}
           br
+          if(data.status == 0)
+          else if(data.status == 1)
+            | Les secours ont été informés
+            br
+          else if(data.status == 2)
+            | Les secours ont été envoyés
+            br
           span(id='date', class="date-object") #{data.date}
         
       .col-md-6.pull-right
