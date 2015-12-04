@@ -15,8 +15,10 @@ block content
           if(data.status == 0)
           else if(data.status == 1)
             | Les secours ont été informés
+            br
           else  
             | Les secours ont été envoyés
+            br
           span(id='date', class="date-object") #{data.date}
         
       .col-md-6.pull-right
