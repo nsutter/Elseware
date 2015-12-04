@@ -22,7 +22,7 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-    res.render('login', { user : req.user });
+    res.render('login', { siteTitle: 'EventReporter', user : req.user });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
@@ -37,7 +37,7 @@ router.get('/logout', function(req, res) {
 router.get('/admin', function(req, res) {
     if(req.user !== undefined && req.user.username == 'admin'){
       Event.find().limit(4).sort({date: -1}).exec(function (err, ev) {
-        res.render('admin', { title: "Panneau d'administration", data: ev });
+        res.render('admin', { siteTitle: 'EventReporter', title: "Panneau d'administration", data: ev });
       });
     }
     else {
@@ -48,23 +48,23 @@ router.get('/admin', function(req, res) {
 /* GET home page. */
 router.get('/info/:id', function(req, res, next) {
   Event.findOne({_id: req.params.id}, function (err, resu){
-    res.render('info', { title: resu.nom, data: resu });
+    res.render('info', { siteTitle: 'EventReporter', title: resu.nom, data: resu });
   });
 });
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'EventReporter' });
+  res.render('index', { siteTitle: 'EventReporter', title: 'EventReporter' });
   console.log("user :" + req.user);
 });
 
 router.get('/event', function(req, res, next) {
   Event.find().limit(4).sort({date: -1}).exec(function (err, ev) {
-    res.render('event', { title: 'Événements en cours', data: ev });
+    res.render('event', { siteTitle: 'EventReporter', title: 'Événements en cours', data: ev });
   });
 });
 
 router.get('/signaler', function(req, res, next) {
-  res.render('signaler', { title: 'Signaler un événement' });
+  res.render('signaler', { siteTitle: 'EventReporter', title: 'Signaler un événement' });
 });
 
 router.post('/signaler', function(req, res, next) {
