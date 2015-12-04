@@ -44,15 +44,20 @@ router.get('/admin', function(req, res) {
 });
 
 /* GET home page. */
+router.get('/info/:id', function(req, res, next) {
+  Event.findOne({_id: req.params.id}, function (err, resu){
+    res.render('info', { title: 'data.nom', data: resu });
+  });
+});
+
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'EventReporter' });
   console.log("user :" + req.user);
 });
 
 router.get('/event', function(req, res, next) {
-  Event.find().limit(2).sort({date: -1}).exec(function (err, ev) {
-    console.log(ev);
-    res.render('event', { title: 'Événements en cours', data: ev });
+  Event.find().limit(4).sort({date: -1}).exec(function (err, ev) {
+    res.render('event', { title: 'Événements', data: ev });
   });
 });
 
@@ -65,5 +70,30 @@ router.post('/signaler', function(req, res, next) {
   newEvent.save();
   res.redirect('/');
   });
+
+  var server = require('http').createServer(router),
+      io = require('socket.io').listen(server),
+      ent = require('ent'),
+      fs = require('fs');
+
+	var io = require('socket.io').listen(server);
+
+	// quand un client se connecte
+  io.sockets.on('connection', function (socket, pseudo, room) {
+
+    socket.on('nouveau_client', function(pseudo, room) {
+        socket.join(room);
+        console.log("yolo", pseudo, room);
+        pseudo = ent.encode(pseudo);
+        socket.broadcast.to(room).emit('nouveau_client', pseudo);
+    });
+
+    socket.on('message', function (message, pseudo, room) {
+          message = ent.encode(message);
+          socket.broadcast.to(room).emit('message', {pseudoem: pseudo, message: message});
+      });
+
+  });
+	server.listen(3001);
 
 module.exports = router;
