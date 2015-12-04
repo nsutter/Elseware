@@ -2,13 +2,28 @@ extends layout
 
 block content
   h1= title
-  p
-    Voici le(s) evenement(s) qui ont été signaler:
     
   .container
     .row
       .col-md-6.pull-left
         .well
-          | Affichage des events
+          | Voici le(s) evenement(s) qui ont été signaler:
+          -var nb=data.length
+          -var i=0
+          while i<nb
+            data[]
+            -i=i+1
       .col-md-6.pull-left
         .well
+          #map
+            link(rel="stylesheet", href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css')
+            script(src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js')
+            script.
+              var map = L.map('map').setView([43.46886761482925, 5.361328125], 5);
+              //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+              L.tileLayer('http://{s}.tiles.mapbox.com/v3/examples.map-i86l3621/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+              L.control.scale().addTo(map); 
+              L.marker([43.46886761482925, 5.361328125]).addTo(map);
+              window.onpopstate=function(e){if(e.state.action == "refresh"){window.location.reload();}}
+              
+  
