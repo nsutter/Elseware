@@ -6,18 +6,17 @@ block content
     h1= title
     .row
       .col-md-6.pull-left
-        .well
-          | Voici le(s) evenement(s) qui ont été signaler:
+        | Voici le(s) evenement(s) qui ont été signaler:
+        br
+        -var nb=data.length
+        -var i=0
+        while i<nb
           br
-          -var nb=data.length
-          -var i=0
-          while i<nb
-            br
+          .well
             | #{data[i].nom} 
             br
             | #{data[i].description} #{data[i].date} 
-            br
-            -i=i+1
+          -i=i+1
       .col-md-6.pull-left
         #map
           link(rel="stylesheet", href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css')
@@ -27,14 +26,14 @@ block content
             L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               }).addTo(map);
-            if(#{data[0].latitude} != 0){
-              L.marker([#{data[0].latitude}, #{data[0].longitude}]).addTo(map)
-              .bindPopup("#{data[0].description}")
-              .openPopup();
-            }
+              
             if(#{data[1].latitude} != 0){
               L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map)
               .bindPopup("#{data[1].description}")
+            }
+            if(#{data[0].latitude} != 0){
+              L.marker([#{data[0].latitude}, #{data[0].longitude}]).addTo(map)
+              .bindPopup("#{data[0].description}")
               .openPopup();
             }
 
