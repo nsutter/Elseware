@@ -1,16 +1,18 @@
 extends layout
 
 block content
+
   .container
-    h1 Liste des événements signalés par la communauté
+    h1= title
     .row
       .col-md-6.pull-left
-        | Voici le(s) evenement(s) qui ont été signalés:
+        | Liste des événements signalés par la communautés:
         br
         -var nb=data.length
         -var i=0
         while i<nb
           br
+          a(href"/sites/#{data[i]._id}")
           .well
             | #{data[i].nom}
             br
@@ -27,14 +29,22 @@ block content
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               }).addTo(map);
 
-            if(#{data[1].latitude} != 0){
-              L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map)
-              .bindPopup("#{data[1].description}")
-            }
             if(#{data[0].latitude} != 0){
               L.marker([#{data[0].latitude}, #{data[0].longitude}]).addTo(map)
               .bindPopup("#{data[0].description}")
               .openPopup();
+            }
+            if(#{data[1].latitude} != 0){
+              L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map)
+              .bindPopup("#{data[1].description}")
+            }
+            if(#{data[2].latitude} != 0){
+              L.marker([#{data[2].latitude}, #{data[2].longitude}]).addTo(map)
+              .bindPopup("#{data[2].description}")
+            }
+            if(#{data[3].latitude} != 0){
+              L.marker([#{data[3].latitude}, #{data[3].longitude}]).addTo(map)
+              .bindPopup("#{data[3].description}")
             }
 
             $('.date-object').each(function (index, value){
