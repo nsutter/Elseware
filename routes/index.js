@@ -89,9 +89,9 @@ router.post('/signaler', function(req, res, next) {
       ent = require('ent'),
       fs = require('fs');
 
-	var io = require('socket.io').listen(server);
+  var io = require('socket.io').listen(server);
 
-	// quand un client se connecte
+  // quand un client se connecte
   io.sockets.on('connection', function (socket, pseudo, room) {
 
     socket.on('nouveau_client', function(pseudo, room) {
@@ -106,6 +106,6 @@ router.post('/signaler', function(req, res, next) {
       });
 
   });
-	server.listen(3001);
+  server.listen(3001);
 
 module.exports = router;
