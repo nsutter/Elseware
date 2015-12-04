@@ -8,9 +8,21 @@ block content
   | Par mesure de sécurité, votre adresse IP est sauvegardé lors d'un signalement
   form(role='form', name='form', action='/signaler', method='post', enctype='plain')
     .form-group
-      input.form-control#latitude(type='hidden', name='latitude', value='')
-      input.form-control#longitude(type='hidden', name='longitude', value='')
-      input.form-control#date(type='hidden', name='date', value='')
-      input.form-control#ip(type='hidden', name='ip', value='')
-      input.form-control(type='text', name='message', placeholder="Description rapide de l'événement")
-      button.btn.btn-default(type='submit') Envoyer le signalement
+    .btn-group(data-toggle='buttons')
+      label.btn.btn-primary.active
+        input#option1(type='radio', name='attentat', autocomplete='off')
+        |  Attentat
+      label.btn.btn-primary
+        input#option2(type='radio', name='incendie', autocomplete='off')
+        |  Incendie
+      label.btn.btn-primary
+        input#option3(type='radio', name='catastrophe', autocomplete='off')
+        |  Catastrophe naturelle
+    br
+    input.form-control#latitude(type='hidden', name='latitude', value='')
+    input.form-control#longitude(type='hidden', name='longitude', value='')
+    input.form-control#date(type='hidden', name='date', value='')
+    input.form-control#ip(type='hidden', name='ip', value='')
+    br
+    input.form-control(type='text', name='message', placeholder="Description rapide de l'événement")
+    button.btn.btn-default(type='submit') Envoyer le signalement
