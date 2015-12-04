@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/event', function(req, res, next) {
-  Event.find().limit(2).exec(function (err, ev) {
+  Event.find().limit(2).sort({date: -1}).exec(function (err, ev) {
+    console.log(ev);
     res.render('event', { title: 'Événements', data: ev });
   });
 });

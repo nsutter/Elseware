@@ -1,29 +1,42 @@
 extends layout
 
 block content
-  h1= title
-    
+  
   .container
+    h1= title
     .row
       .col-md-6.pull-left
         .well
           | Voici le(s) evenement(s) qui ont été signaler:
+          br
           -var nb=data.length
           -var i=0
           while i<nb
-            data[]
+            br
+            | #{data[i].nom} 
+            br
+            | #{data[i].description} #{data[i].date} 
+            br
             -i=i+1
       .col-md-6.pull-left
-        .well
-          #map
-            link(rel="stylesheet", href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css')
-            script(src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js')
-            script.
-              var map = L.map('map').setView([43.46886761482925, 5.361328125], 5);
-              //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-              L.tileLayer('http://{s}.tiles.mapbox.com/v3/examples.map-i86l3621/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
-              L.control.scale().addTo(map); 
-              L.marker([43.46886761482925, 5.361328125]).addTo(map);
-              window.onpopstate=function(e){if(e.state.action == "refresh"){window.location.reload();}}
+        #map
+          link(rel="stylesheet", href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css')
+          script(src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js')
+          script.
+            var map = L.map('map').setView([43.46886761482925, 5.361328125], 5);
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              }).addTo(map);
+            if(#{data[0].latitude} != 0){
+              L.marker([#{data[0].latitude}, #{data[0].longitude}]).addTo(map)
+              .bindPopup("#{data[0].description}")
+              .openPopup();
+            }
+            if(#{data[1].latitude} != 0){
+              L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map)
+              .bindPopup("#{data[1].description}")
+              .openPopup();
+            }
+
               
   
