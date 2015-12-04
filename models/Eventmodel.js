@@ -1,7 +1,13 @@
-module.exports = function(models, bookshelf) {
-  var Event = bookshelf.Model.extend({
-    tableName: 'event'
-  });
+var mongoose = require('mongoose');
 
-  return Event;
-};
+module.exports = mongoose.model('Event',{
+	nom: String,
+	description: String,
+	statut: String,
+	date: String,
+	type: Number,
+  longitude: Number,
+  latitude: Number,
+  date: Date,
+	ip: String
+});

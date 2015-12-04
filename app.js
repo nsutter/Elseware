@@ -7,12 +7,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var dbConfig = require('./db');
+var mongoose = require('mongoose');
+mongoose.connect(dbConfig.url);
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
-var db = require("./database.js")(config);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
