@@ -35,8 +35,10 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/admin', function(req, res) {
-    if(req.user.username == 'admin'){
-      res.render('admin', { user : req.user });
+    if(req.user !== undefined && req.user.username == 'admin'){
+      Event.find().limit(4).sort({date: -1}).exec(function (err, ev) {
+        res.render('admin', { title: "Panneau d'administration", data: ev });
+      });
     }
     else {
       res.redirect('/');
@@ -57,7 +59,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/event', function(req, res, next) {
   Event.find().limit(4).sort({date: -1}).exec(function (err, ev) {
-    res.render('event', { title: 'Événements', data: ev });
+    res.render('event', { title: 'Événements en cours', data: ev });
   });
 });
 
