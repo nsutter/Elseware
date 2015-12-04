@@ -12,12 +12,12 @@ block content
         -var i=0
         while i<nb
           br
-          a(href"/sites/#{data[i]._id}")
-          .well
-            | #{data[i].nom}
-            br
-            | #{data[i].description}
-            span(id='date-#{i}', class="date-object") #{data[i].date}
+          a(href="/info/#{data[i]._id}")
+            .well
+              | #{data[i].nom}
+              br
+              | #{data[i].description}
+              span(id='date-#{i}', class="date-object") #{data[i].date}
           -i=i+1
       .col-md-6.pull-left
         #map
@@ -30,21 +30,16 @@ block content
               }).addTo(map);
 
             if(#{data[0].latitude} != 0){
-              L.marker([#{data[0].latitude}, #{data[0].longitude}]).addTo(map)
-              .bindPopup("#{data[0].description}")
-              .openPopup();
+              L.marker([#{data[0].latitude}, #{data[0].longitude}]).addTo(map).bindPopup("#{data[0].description}").openPopup();
             }
             if(#{data[1].latitude} != 0){
-              L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map)
-              .bindPopup("#{data[1].description}")
+              L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map).bindPopup("#{data[1].description}")              
             }
             if(#{data[2].latitude} != 0){
-              L.marker([#{data[2].latitude}, #{data[2].longitude}]).addTo(map)
-              .bindPopup("#{data[2].description}")
+              L.marker([#{data[2].latitude}, #{data[2].longitude}]).addTo(map).bindPopup("#{data[2].description}")
             }
             if(#{data[3].latitude} != 0){
-              L.marker([#{data[3].latitude}, #{data[3].longitude}]).addTo(map)
-              .bindPopup("#{data[3].description}")
+              L.marker([#{data[3].latitude}, #{data[3].longitude}]).addTo(map).bindPopup("#{data[3].description}")
             }
 
             $('.date-object').each(function (index, value){
