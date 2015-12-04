@@ -48,7 +48,7 @@ router.get('/admin', function(req, res) {
 /* GET home page. */
 router.get('/info/:id', function(req, res, next) {
   Event.findOne({_id: req.params.id}, function (err, resu){
-    res.render('info', { title: 'data.nom', data: resu });
+    res.render('info', { title: resu.nom, data: resu });
   });
 });
 
