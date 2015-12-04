@@ -6,18 +6,26 @@ block content
     .row
       .col-md-6.pull-left
         .well
+          h1 #{data.nom}
+          br
+          | #{data.description}
+          br
+          | #{data.admin}
+          br
+          span(id='date', class="date-object") #{data.date}
+        
       .col-md-6.pull-right
         .well
           section#zone_chat
       
         form#newMessage(action='/', method='post')
           .col-md-10.col-sm-10.col-xs-8.pull-left
-            input.form-control(type='text', name='message', id='message', placeholder='Your message')
+            input.form-control(type='text', name='message', id='message', placeholder='Tapez votre message')
           .col-md-1.col-sm-1.col-xs-1.pull-left
             .input-group-btn
               .form-group
                 button.btn.btn-default(type='submit')
-                  | Send
+                  | Envoyer
     
   script(src='https://cdn.socket.io/socket.io-1.3.7.js')
   script.
@@ -41,7 +49,7 @@ block content
               });
               
     socket.on('nouveau_client', function(pseudo) {
-          $('#zone_chat').prepend('<p><em>' + pseudo + ' a rejoint le Chat !</em></p>');
+          $('#zone_chat').append('<p><em>' + pseudo + ' a rejoint le Chat !</em></p>');
         })
 
     function insereMessage(pseudoem, message) {
@@ -50,3 +58,10 @@ block content
     function inseretexte(texte) {
               $('#zone_chat').append('<p>' + texte + '</p>');
           }
+      $('.date-object').each(function (index, value){
+        var months=["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+        var dateString=$('#date').html();
+        dateString=new Date(dateString);
+        dateString= dateString.getDate() + " " + months[dateString.getMonth()] + " " + dateString.getFullYear();
+        $('#date').html(dateString);
+      });
