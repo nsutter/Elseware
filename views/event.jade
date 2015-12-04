@@ -1,21 +1,22 @@
 extends layout
 
 block content
-  
+
   .container
     h1= title
     .row
       .col-md-6.pull-left
-        | Voici le(s) evenement(s) qui ont été signaler:
+        | Voici le(s) evenement(s) qui ont été signalés:
         br
         -var nb=data.length
         -var i=0
         while i<nb
           br
           .well
-            | #{data[i].nom} 
+            | #{data[i].nom}
             br
-            | #{data[i].description} #{data[i].date} 
+            | #{data[i].description}
+            span(id='date-#{i}', class="date-object") #{data[i].date}
           -i=i+1
       .col-md-6.pull-left
         #map
@@ -26,7 +27,7 @@ block content
             L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               }).addTo(map);
-              
+
             if(#{data[1].latitude} != 0){
               L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map)
               .bindPopup("#{data[1].description}")
@@ -37,5 +38,13 @@ block content
               .openPopup();
             }
 
-              
-  
+            $('.date-object').each(function (index, value){
+              var months=["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+              var dateString=$('#date-'+index).html();
+              dateString=new Date(dateString);
+              dateString=", le " + dateString.getDate() + " " + months[dateString.getMonth()] + " " + dateString.getFullYear();
+              $('#date-'+index).html(dateString);
+            });
+
+
+
