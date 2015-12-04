@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  .container
+    h1 Liste des événements signalés par la communauté
+    .row
+      .col-md-6.pull-left
+        | Voici le(s) evenement(s) qui ont été signalés:
+        br
+        -var nb=data.length
+        -var i=0
+        while i<nb
+          br
+          .well
+            | #{data[i].nom}
+            br
+            | #{data[i].description}
+            span(id='date-#{i}', class="date-object") #{data[i].date}
+          -i=i+1
+      .col-md-6.pull-left
+        #map
+          link(rel="stylesheet", href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css')
+          script(src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js')
+          script.
+            var map = L.map('map').setView([43.46886761482925, 5.361328125], 5);
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              }).addTo(map);
+
+            if(#{data[1].latitude} != 0){
+              L.marker([#{data[1].latitude}, #{data[1].longitude}]).addTo(map)
+              .bindPopup("#{data[1].description}")
+            }
+            if(#{data[0].latitude} != 0){
+              L.marker([#{data[0].latitude}, #{data[0].longitude}]).addTo(map)
+              .bindPopup("#{data[0].description}")
+              .openPopup();
+            }
+
+            $('.date-object').each(function (index, value){
+              var months=["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+              var dateString=$('#date-'+index).html();
+              dateString=new Date(dateString);
+              dateString=", le " + dateString.getDate() + " " + months[dateString.getMonth()] + " " + dateString.getFullYear();
+              $('#date-'+index).html(dateString);
+            });

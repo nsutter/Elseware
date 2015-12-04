@@ -5,18 +5,6 @@ var router = express.Router();
 var Event = require('../models/EventModel');
 var UserModel = require('../models/UserModel');
 
-function nameParse(a,b,c){
-  if(a!==undefined)
-    return "attentat";
-  else if(b!==undefined)
-    return "incendie";
-  else if(c!==undefined)
-    return "catastrophe";
-  else {
-      return "Pas de catégories";
-  }
-}
-
 router.get('/register', function(req, res) {
     res.render('register', { });
 });
@@ -38,12 +26,21 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
+    res.redirect('/admin');
 });
 
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
+});
+
+router.get('/admin', function(req, res) {
+    if(req.user.username == 'admin'){
+      res.render('admin', { user : req.user });
+    }
+    else {
+      res.redirect('/');
+    }
 });
 
 /* GET home page. */
@@ -55,7 +52,7 @@ router.get('/', function(req, res, next) {
 router.get('/event', function(req, res, next) {
   Event.find().limit(2).sort({date: -1}).exec(function (err, ev) {
     console.log(ev);
-    res.render('event', { title: 'Événements', data: ev });
+    res.render('event', { title: 'Événements en cours', data: ev });
   });
 });
 
@@ -64,8 +61,7 @@ router.get('/signaler', function(req, res, next) {
 });
 
 router.post('/signaler', function(req, res, next) {
-  var nom = nameParse(req.body.attentat,req.body.incendie,req.body.catastrophe);
-  var newEvent = new Event({nom: nom, description: req.body.message, statut: "0", date: req.body.date, longitude: req.body.longitude, latitude: req.body.latitude, date: req.body.date, ip: req.body.ip});
+  var newEvent = new Event({nom: req.body.nom, description: req.body.message, statut: 0, date: req.body.date, longitude: req.body.longitude, latitude: req.body.latitude, date: req.body.date, ip: req.body.ip});
   newEvent.save();
   res.redirect('/');
   });
