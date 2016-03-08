@@ -1,9 +1,7 @@
-# Elseware
-Projet pour la nuit de l'info 2015 de la team elseware. Le sujet se trouve [ici](http://www.nuitdelinfo.com/nuitinfo/_media/la_nuit_de_l_info_2015_-_sujet.pdf)
+# [EventReporter](elseware.herokuapp.com) : un gestionnaire d'incident avec géolocalisation
+Projet pour la Nuit de l'Info 2015 [sujet](http://www.nuitdelinfo.com/nuitinfo/_media/la_nuit_de_l_info_2015_-_sujet.pdf) de l'équipe Elseware : nsutter, zatteo, ludovicm67, sandhose, qwendling.
 <br/>
-1er prix pour le defi remote work 
+1er prix pour le défi [Objectif remote work](http://www.nuitdelinfo.com/n2i/defis/16)
 <br/>
-[lien du defi](http://www.nuitdelinfo.com/n2i/defis/16)
-<br/>
-[lien des resultats](http://www.nuitdelinfo.com/nuitinfo/defis2015:start)
+2ème prix pour le défi [Navigateurs connectés](http://www.nuitdelinfo.com/n2i/defis/87)
 <br/>
